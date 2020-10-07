@@ -1,4 +1,26 @@
 import sqlite3
+from peewee import AutoField, CharField, DateTimeField, SqliteDatabase, Model
+import datetime
+
+db = SqliteDatabase("database.db")
+
+
+class Todo(Model):
+    current_time = datetime.datetime.now
+    id = AutoField()
+    todo_message = CharField()
+    date_created = DateTimeField(default=current_time)
+    date_updated = DateTimeField(default=current_time)
+
+    class Meta:
+        database = db
+
+
+# make sure table is good
+def setup_table():
+    db.connect()
+    db.create_tables([Todo])
+    db.close()
 
 
 def connection_handler():

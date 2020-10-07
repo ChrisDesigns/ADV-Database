@@ -1,5 +1,9 @@
 import os
 from app import home, create, read, update, delete
+from app.database import setup_table
+
+# make sure table is structure properly
+setup_table()
 
 # are we executing at PythonAnywhere?
 ON_PYTHONANYWHERE = "PYTHONANYWHERE_DOMAIN" in os.environ
