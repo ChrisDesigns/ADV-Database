@@ -48,12 +48,12 @@ def return_execute(statement):
 
 
 # execute with no returns  (IE insert or update)
-def void_execute(statement):
+def void_execute(statement, arguments=None):
     connection = connection_handler()
     try:
         cursor = connection.cursor()
-        cursor.execute(statement)
+        cursor.execute(statement, arguments)
         connection.commit()
         cursor.close()
-    except:
-        print("failed to execute")
+    except sqlite3.Error as e:
+        print("failed to execute, error: " + str(e))
